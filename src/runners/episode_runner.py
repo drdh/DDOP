@@ -3,6 +3,7 @@ from functools import partial
 from components.episode_buffer import EpisodeBatch
 import numpy as np
 import time
+import copy
 
 
 class EpisodeRunner:
@@ -13,7 +14,7 @@ class EpisodeRunner:
         self.batch_size = self.args.batch_size_run
         assert self.batch_size == 1
 
-        self.env = env_REGISTRY[self.args.env](**self.args.env_args)
+        self.env = env_REGISTRY[self.args.env](env_args=self.args.env_args, args=args) #(**self.args.env_args)
         self.episode_limit = self.env.episode_limit
         self.t = 0
 
@@ -67,7 +68,8 @@ class EpisodeRunner:
             # Receive the actions for each agent at this timestep in a batch of size 1
             actions = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, test_mode=test_mode).detach()
 
-            reward, terminated, env_info = self.env.step(actions[0])
+            cpu_actions = copy.deepcopy(actions).to("cpu").numpy()
+            reward, terminated, env_info = self.env.step(cpu_actions[0])
             if self.args.display:
                 time.sleep(0.1)
                 self.env.render()

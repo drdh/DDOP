@@ -1,4 +1,23 @@
+from collections import namedtuple
+import numpy as np
+
+
+def convert(dictionary):
+    return namedtuple('GenericDict', dictionary.keys())(**dictionary)
+
+
 class MultiAgentEnv(object):
+
+    def __init__(self, batch_size=None, **kwargs):
+        # Unpack arguments from sacred
+        args = kwargs["env_args"]
+        if isinstance(args, dict):
+            args = convert(args)
+        self.args = args
+
+        if getattr(args, "seed", None) is not None:
+            self.seed = args.seed
+            self.rs = np.random.RandomState(self.seed) # initialise numpy random state
 
     def step(self, actions):
         """ Returns reward, terminated, info """
@@ -35,6 +54,12 @@ class MultiAgentEnv(object):
         # TODO: This is only suitable for a discrete 1 dimensional action space for each agent
         raise NotImplementedError
 
+    def get_stats(self):
+        raise NotImplementedError
+
+    def get_agg_stats(self, stats):
+        return {}
+
     def reset(self):
         """ Returns initial observations and states"""
         raise NotImplementedError
@@ -45,10 +70,7 @@ class MultiAgentEnv(object):
     def close(self):
         raise NotImplementedError
 
-    def seed(self):
-        raise NotImplementedError
-
-    def save_replay(self):
+    def seed(self, seed):
         raise NotImplementedError
 
     def get_env_info(self):

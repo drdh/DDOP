@@ -57,12 +57,13 @@ class BasicMAC:
                     # Zero out the unavailable actions
                     agent_outs[reshaped_avail_actions == 0] = 0.0
 
-        if self.agent_output_type == "cont_softmax":
-            u = th.rand(agent_outs.shape).cuda().detach()
-            softmax_agent_outs = th.nn.functional.softmax(agent_outs - th.log(-th.log(u)), dim=-1)
+        # if self.agent_output_type == "cont_softmax":
+        #     u = th.rand(agent_outs.shape).cuda().detach()
+        #     softmax_agent_outs = th.nn.functional.softmax(agent_outs - th.log(-th.log(u)), dim=-1)
 
         if self.agent_output_type == "cont_softmax":
-            return softmax_agent_outs.view(ep_batch.batch_size, self.n_agents, -1), agent_outs
+            return th.tanh(agent_outs.view(ep_batch.batch_size, self.n_agents, -1)), agent_outs
+            # return softmax_agent_outs.view(ep_batch.batch_size, self.n_agents, -1), agent_outs
         else:
             return agent_outs.view(ep_batch.batch_size, self.n_agents, -1)
 

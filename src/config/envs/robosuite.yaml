@@ -1,0 +1,46 @@
+env: "robosuite"
+
+# lift
+env_args:
+  default_controller: "JOINT_VELOCITY"
+  scenario: "Lift"
+  robots: ["Sawyer"]
+  gripper_types: "default"
+  env_configuration: "default"
+  has_renderer: False
+  has_offscreen_renderer: False
+  control_freq: 20
+  horizon: 500
+  use_object_obs: True
+  use_camera_obs: False
+  reward_shaping: True
+
+  num_joints: 7
+  has_gripper: True
+  has_object: True
+
+  action_dims: 1
+
+# wipe
+#env_args:
+#  default_controller: "JOINT_VELOCITY"
+#  scenario: "Wipe"
+#  robots: ["Sawyer"]
+#  gripper_types: "WipingGripper"
+#  env_configuration: "default"
+#  has_renderer: False
+#  has_offscreen_renderer: False
+#  control_freq: 20
+#  horizon: 500
+#  use_object_obs: True
+#  use_camera_obs: False
+#  reward_shaping: True
+#
+#  num_joints: 7
+#  has_gripper: False
+#  has_object: True
+#
+#  action_dims: 1
+
+
+
