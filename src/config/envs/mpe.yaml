@@ -1,0 +1,32 @@
+env: mpe
+
+env_args:
+  scenario_name: "simple_speaker_listener"
+  benchmark: False
+  episode_limit: 50
+  max_reward: 10
+  n_agents: 3
+  step_mul: None
+  seed: None
+  continuing_episode: False
+  reward_sparse: False
+  reward_only_positive: False
+  reward_death_value: 10
+  reward_win: 200
+  reward_defeat: 0
+  reward_negative_scale: 0.5
+  reward_scale: False
+  reward_scale_rate: 20
+  debug: False
+  shared_viewer: True
+  matrix_game: False
+  test_return: False
+
+test_greedy: False
+test_nepisode: 100
+test_interval: 20000
+log_interval: 20000
+runner_log_interval: 20000
+learner_log_interval: 20000
+t_max: 2050000
+agent_output_type: 'softmax'
