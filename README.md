@@ -1,0 +1,3 @@
+# DDOP
+
+Deterministic DOP
