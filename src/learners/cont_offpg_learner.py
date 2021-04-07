@@ -61,11 +61,12 @@ class ContOffPGLearner:
 
         if t_env - self.log_stats_t >= self.args.learner_log_interval:
             ts_logged = len(log["critic_loss"])
-            for key in ["critic_loss", "critic_grad_norm", "td_error_abs"]:
+            for key in ["critic_loss", "td_error_abs"]:
                 self.logger.log_stat(key, sum(log[key])/ts_logged, t_env)
+            self.logger.log_stat("critic_grad_norm", sum(log['critic_grad_norm']).item()/ts_logged, t_env)
             self.logger.log_stat("dpg_loss", dpg_loss.item(), t_env)
             self.logger.log_stat("reg_loss", reg_loss.item(), t_env)
-            self.logger.log_stat("agent_grad_norm", grad_norm, t_env)
+            self.logger.log_stat("agent_grad_norm", grad_norm.item(), t_env)
             self.log_stats_t = t_env
 
     def eval_q(self, bs, states, obs, actions):

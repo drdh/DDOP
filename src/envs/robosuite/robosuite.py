@@ -30,7 +30,7 @@ class Robosuite(MultiAgentEnv):
         self.n_agents = self.args.num_joints # TODO: consider gripper,multi-robot
         if self.args.has_gripper:
             self.n_agents += 1
-        self.n_actions = self.args.action_dims
+        self.n_actions = self.args.action_dims*3
         self.episode_limit = self.args.horizon
         self.action_space = [spaces.Box(low=np.array([self.env.action_spec[0][0]]), # TODO: check whether all the action belong to [-1,1]
                                         high=np.array([self.env.action_spec[1][0]]), dtype=np.float32)
@@ -42,6 +42,7 @@ class Robosuite(MultiAgentEnv):
         self.reward_this_episode = 0
 
     def step(self, actions):
+        actions = actions[:,0] - actions[:,1]
         self.obs_list, reward, done, info = self.env.step(actions.reshape(-1))
         self.steps += 1
         self.reward_this_episode += reward
