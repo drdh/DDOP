@@ -5,7 +5,7 @@ from modules.critics.offpg import OffPGCritic
 import torch as th
 from utils.offpg_utils import build_target_q
 from utils.rl_utils import build_td_lambda_targets
-from torch.optim import RMSprop
+from torch.optim import RMSprop, Adam
 from modules.mixers.qmix import QMixer
 from collections import OrderedDict
 
@@ -35,8 +35,11 @@ class ContOffPGLearner:
         self.params = self.agent_params + self.critic_params
         self.c_params = self.critic_params + self.mixer_params
 
-        self.agent_optimiser = RMSprop(params=self.agent_params, lr=args.lr, alpha=args.optim_alpha, eps=args.optim_eps)
-        self.critic_optimiser = RMSprop(params=self.c_params, lr=args.critic_lr, alpha=args.optim_alpha, eps=args.optim_eps)
+        # self.agent_optimiser = RMSprop(params=self.agent_params, lr=args.lr, alpha=args.optim_alpha, eps=args.optim_eps)
+        self.agent_optimiser = Adam(params=self.agent_params,lr=args.lr)
+
+        # self.critic_optimiser = RMSprop(params=self.c_params, lr=args.critic_lr, alpha=args.optim_alpha, eps=args.optim_eps)
+        self.critic_optimiser = Adam(params=self.c_params, lr=args.critic_lr)
 
     def train(self, batch: EpisodeBatch, t_env: int, log):
         # Get the relevant quantities
