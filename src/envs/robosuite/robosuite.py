@@ -71,14 +71,14 @@ class Robosuite(MultiAgentEnv):
                                       self.obs_list['robot0_gripper_qvel'],
                                       np.ones(1),
 
-                                      self.obs_list['robot0_joint_pos_cos'],
-                                      self.obs_list['robot0_joint_pos_sin'],
-                                      self.obs_list['robot0_joint_vel'],
-                                      self.obs_list['robot0_eef_pos'],
-                                      self.obs_list['robot0_eef_quat'],
-                                      self.obs_list['object-state'],
-                                      self.obs_list['robot0_gripper_qpos'],
-                                      self.obs_list['robot0_gripper_qvel'],
+                                      # self.obs_list['robot0_joint_pos_cos'],
+                                      # self.obs_list['robot0_joint_pos_sin'],
+                                      # self.obs_list['robot0_joint_vel'],
+                                      # self.obs_list['robot0_eef_pos'],
+                                      # self.obs_list['robot0_eef_quat'],
+                                      # self.obs_list['object-state'],
+                                      # self.obs_list['robot0_gripper_qpos'],
+                                      # self.obs_list['robot0_gripper_qvel'],
                                       ])
             else:
                 obs = np.concatenate([self.obs_list['robot0_eef_pos'],
@@ -89,14 +89,14 @@ class Robosuite(MultiAgentEnv):
                                       self.obs_list['robot0_joint_vel'][agent_id:agent_id + 1],
                                       np.zeros(5),
 
-                                      self.obs_list['robot0_joint_pos_cos'],
-                                      self.obs_list['robot0_joint_pos_sin'],
-                                      self.obs_list['robot0_joint_vel'],
-                                      self.obs_list['robot0_eef_pos'],
-                                      self.obs_list['robot0_eef_quat'],
-                                      self.obs_list['object-state'],
-                                      self.obs_list['robot0_gripper_qpos'],
-                                      self.obs_list['robot0_gripper_qvel'],
+                                      # self.obs_list['robot0_joint_pos_cos'],
+                                      # self.obs_list['robot0_joint_pos_sin'],
+                                      # self.obs_list['robot0_joint_vel'],
+                                      # self.obs_list['robot0_eef_pos'],
+                                      # self.obs_list['robot0_eef_quat'],
+                                      # self.obs_list['object-state'],
+                                      # self.obs_list['robot0_gripper_qpos'],
+                                      # self.obs_list['robot0_gripper_qvel'],
                                       ])
 
         else:
@@ -107,13 +107,13 @@ class Robosuite(MultiAgentEnv):
                                   self.obs_list['robot0_joint_pos_sin'][agent_id:agent_id + 1],
                                   self.obs_list['robot0_joint_vel'][agent_id:agent_id + 1],
                                   np.zeros(5),
-
-                                  self.obs_list['robot0_joint_pos_cos'],
-                                  self.obs_list['robot0_joint_pos_sin'],
-                                  self.obs_list['robot0_joint_vel'],
-                                  self.obs_list['robot0_eef_pos'],
-                                  self.obs_list['robot0_eef_quat'],
-                                  self.obs_list['object-state']
+                                  #
+                                  # self.obs_list['robot0_joint_pos_cos'],
+                                  # self.obs_list['robot0_joint_pos_sin'],
+                                  # self.obs_list['robot0_joint_vel'],
+                                  # self.obs_list['robot0_eef_pos'],
+                                  # self.obs_list['robot0_eef_quat'],
+                                  # self.obs_list['object-state']
                                   ])
         return obs
 

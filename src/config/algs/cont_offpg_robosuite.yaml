@@ -6,7 +6,7 @@ runner: "episode"
 
 buffer_size: 10000
 batch_size_run: 1
-batch_size: 50
+batch_size: 8
 
 env_args:
   state_last_action: False # critic adds last action internally

@@ -50,5 +50,5 @@ label: "default_label"
 display: False
 
 # --- Message Passing ---
-msg_pass: False
+msg_pass: True
 msg_dim: 32
